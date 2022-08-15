@@ -4,19 +4,16 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	_ "github.com/lib/pq"
 	"github.com/nats-io/stan.go"
 	"net/http"
 	"time"
 	"wb_l0/internal"
 	"wb_l0/internal/api"
 	"wb_l0/internal/repo"
+	cache2 "wb_l0/internal/repo/cache"
 	"wb_l0/internal/repo/postgres"
 	"wb_l0/internal/services/data_generator"
-)
-
-import (
-	_ "github.com/lib/pq"
-	cache2 "wb_l0/internal/repo/cache"
 )
 
 const (
@@ -24,6 +21,7 @@ const (
 	pgDriver            = "postgres"
 	stanClusterID       = "test-cluster"
 	stanURL             = "0.0.0.0:4222"
+	serverURL           = "localhost:8080"
 	stanClientID        = "wb-l0-subscriber"
 	subscriptionSubject = "order_data"
 )
@@ -55,7 +53,7 @@ func main() {
 	defer sub.Unsubscribe()
 
 	server := api.NewServer(&cacheData)
-	if err := http.ListenAndServe("localhost:8080", server); err != nil {
+	if err := http.ListenAndServe(serverURL, server); err != nil {
 		panic(err)
 	}
 

@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/doug-martin/goqu/v9 v9.18.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
+	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/lib/pq v1.10.6 // indirect
 	github.com/nats-io/nats.go v1.16.0 // indirect

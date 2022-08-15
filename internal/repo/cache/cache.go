@@ -15,11 +15,11 @@ func NewCacheRepository() *Repository {
 	}
 }
 
-func (r *Repository) Create(orderData repo.OrderData) (*repo.OrderData, error) {
-	id := orderData.OrderUid
-	(*r).Cache[id] = orderData
-	return &orderData, nil
-}
+//func (r *Repository) Create(orderData repo.OrderData) (*repo.OrderData, error) {
+//	id := orderData.OrderUid
+//	(*r).Cache[id] = orderData
+//	return &orderData, nil
+//}
 
 func (r *Repository) All() ([]repo.OrderData, error) {
 	var allRecords []repo.OrderData
@@ -33,7 +33,7 @@ func (r *Repository) GetById(id string) (*repo.OrderData, error) {
 	if record, ok := (*r).Cache[id]; ok {
 		return &record, nil
 	} else {
-		return nil, errors.New("this order_id does not exist in cache")
+		return nil, errors.New("getting record by id: this order_id does not exist in cache")
 	}
 }
 
